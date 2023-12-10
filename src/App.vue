@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
-import { collection, query, where, getDocs } from 'firebase/firestore'
+import { onMounted, ref } from 'vue'
+import { collection, query, onSnapshot } from 'firebase/firestore'
 import { db } from './firebase/config'
-import { reactive } from 'vue'
 
 interface ISong {
   id: string
@@ -11,17 +10,21 @@ interface ISong {
   year: number
 }
 
-const songs: ISong[] = reactive([])
+const songs = ref<ISong[]>()
 
 onMounted(async () => {
   const q = query(collection(db, 'songs'))
 
-  const querySnapshot = await getDocs(q)
-  querySnapshot.forEach((doc) => {
-    songs.push({
-      id: doc.id,
-      ...doc.data(),
-    } as ISong)
+  onSnapshot(q, (querySnapshot) => {
+    const tempDataSongs: ISong[] = []
+    querySnapshot.forEach((doc) => {
+      tempDataSongs.push({
+        id: doc.id,
+        ...doc.data(),
+      } as ISong)
+    })
+
+    songs.value = tempDataSongs
   })
 })
 </script>
