@@ -10,7 +10,7 @@ const props = defineProps<{ songs: ISong[] }>()
       <v-list-subheader>Favorite Songs</v-list-subheader>
 
       <v-list-item
-        v-for="(song, i) in songs"
+        v-for="(song, i) in props.songs"
         :key="i"
         :value="song"
         color="primary"
