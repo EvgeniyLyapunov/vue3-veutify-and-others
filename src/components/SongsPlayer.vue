@@ -4,7 +4,7 @@
       <v-icon icon="mdi-play"></v-icon>
       {{ currentSong.artist }}. {{ currentSong.title }} ({{ currentSong.year }})
     </v-card-text>
-    <v-card-action>
+    <my-v-card-action>
       <v-btn
         variant="text"
         class="favorite-btn"
@@ -12,7 +12,7 @@
       >
         Add to Favorites
       </v-btn>
-    </v-card-action>
+    </my-v-card-action>
   </v-card>
 </template>
 
