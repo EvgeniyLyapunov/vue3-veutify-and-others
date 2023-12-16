@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { ISong } from '@/types'
-
 const props = defineProps<{ songs: ISong[] }>()
 </script>
 
