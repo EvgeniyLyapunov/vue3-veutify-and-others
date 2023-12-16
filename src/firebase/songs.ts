@@ -1,4 +1,11 @@
-import { addDoc, collection, onSnapshot, query } from 'firebase/firestore'
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  onSnapshot,
+  query,
+} from 'firebase/firestore'
 import { db } from './config'
 import type { ISong } from '@/types'
 import type { Ref } from 'vue/dist/vue.js'
@@ -27,4 +34,8 @@ export const addSongs = async (song: ISong) => {
     artist: song.artist,
     year: song.year,
   })
+}
+
+export const deleteSong = async (songId: string) => {
+  await deleteDoc(doc(db, DB_NAME, songId))
 }
