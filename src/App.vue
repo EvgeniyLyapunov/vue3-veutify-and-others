@@ -6,6 +6,7 @@ import SongsList from '@/components/SongsList.vue'
 import SongsPlayer from '@/components/SongsPlayer.vue'
 
 const songs = ref<ISong[]>([])
+const isLoading = ref(false)
 
 const playingSongs: ISong[] = [
   {
@@ -42,14 +43,14 @@ const addToFavorite = async (songId: string) => {
 }
 
 onMounted(() => {
-  getSongs(songs)
+  getSongs(songs, isLoading)
 })
 </script>
 
 <template>
   <main>
     <SongsPlayer :songs="playingSongs" @add-to-favorite="addToFavorite" />
-    <SongsList :songs="songs" />
+    <SongsList :songs="songs" :is-loading="isLoading" />
   </main>
 </template>
 

@@ -12,7 +12,11 @@ import type { Ref } from 'vue/dist/vue.js'
 
 const DB_NAME = 'songs'
 
-export const getSongs = async (songs: Ref<ISong[]>) => {
+export const getSongs = async (
+  songs: Ref<ISong[]>,
+  isLoading: Ref<boolean>,
+) => {
+  isLoading.value = true
   const q = query(collection(db, DB_NAME))
 
   onSnapshot(q, (querySnapshot) => {
@@ -25,6 +29,7 @@ export const getSongs = async (songs: Ref<ISong[]>) => {
     })
 
     songs.value = tempDataSongs
+    isLoading.value = false
   })
 }
 
